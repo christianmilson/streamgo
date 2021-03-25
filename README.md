@@ -17,6 +17,6 @@ GET | /api/messages | N/A | Returns all messages
 --- | --- | --- | ---
 POST | /api/messages | author_id: INTEGER, message: STRING | Creates a new message
 --- | --- | --- | ---
-PATCH | /api/messages/id | message: STRING | Updates an existing message
+PATCH | /api/messages/:id | message: STRING | Updates an existing message
 --- | --- | --- | ---
-DELETE | /api/messages/id | N/A | Deletes an existing message
+DELETE | /api/messages/:id | N/A | Deletes an existing message

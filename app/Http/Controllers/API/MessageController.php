@@ -8,10 +8,12 @@ use App\Http\Requests\API\Message\MessageUpdateRequest;
 use App\Http\Resources\API\MessageResource;
 use App\Models\Message;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Http\Response;
 
+/**
+ * Class MessageController
+ * @package App\Http\Controllers\API
+ */
 class MessageController extends Controller
 {
     /**

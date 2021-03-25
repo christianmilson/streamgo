@@ -4,8 +4,11 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
+/**
+ * Class AuthorSeeder
+ * @package Database\Seeders
+ */
 class AuthorSeeder extends Seeder
 {
     /**
