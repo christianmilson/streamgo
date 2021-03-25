@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\Message\MessageStoreRequest;
 use App\Http\Resources\API\MessageResource;
 use App\Models\Message;
 use Illuminate\Http\Request;
@@ -27,12 +28,18 @@ class MessageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
-     * @return void
+     * @param MessageStoreRequest $request
+     * @return MessageResource
      */
-    public function store(Request $request)
+    public function store(MessageStoreRequest $request)
     {
-        //
+        // Create new message
+        $message    = Message::create($request->validated());
+
+        // Load author relation
+        $message->load('author');
+
+        return new MessageResource($message);
     }
 
     /**
