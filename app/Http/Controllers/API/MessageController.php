@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\Message\MessageStoreRequest;
+use App\Http\Requests\API\Message\MessageUpdateRequest;
 use App\Http\Resources\API\MessageResource;
 use App\Models\Message;
 use Illuminate\Http\Request;
@@ -58,13 +59,22 @@ class MessageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param MessageUpdateRequest $request
      * @param Message $message
-     * @return void
+     * @return MessageResource
      */
-    public function update(Request $request, Message $message)
+    public function update(MessageUpdateRequest $request, Message $message)
     {
-        //
+        /**
+         * Save changes to message
+         * Note: Only message can be mutated
+        **/
+        $message->update($request->validated());
+
+        // Load author relation
+        $message->load('author');
+
+        return new MessageResource($message);
     }
 
     /**
