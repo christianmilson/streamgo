@@ -9,8 +9,10 @@ class Message extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'message_id';
+
     public function author()
     {
-        return $this->hasOne(Author::class);
+        return $this->hasOne(Author::class, 'author_id', 'author_id');
     }
 }

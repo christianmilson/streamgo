@@ -9,6 +9,8 @@ class Author extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'author_id';
+
     public function messages()
     {
         return $this->belongsToMany(Message::class);

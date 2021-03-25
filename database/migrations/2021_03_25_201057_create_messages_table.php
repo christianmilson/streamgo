@@ -13,8 +13,11 @@ class CreateMessagesTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
+
         Schema::create('messages', function (Blueprint $table) {
-            $table->id();
+            $table->id('message_id');
+            $table->foreignId('author_id')->constrained('authors', 'author_id');
             $table->string('message', 255);
             $table->timestamps();
         });
