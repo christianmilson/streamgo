@@ -52,6 +52,7 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
+        // Load author relation
         $message->load('author');
 
         return new MessageResource($message);
