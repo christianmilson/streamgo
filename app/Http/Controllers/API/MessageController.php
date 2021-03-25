@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\API\MessageResource;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
 class MessageController extends Controller
@@ -12,18 +14,21 @@ class MessageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return void
+     * @return AnonymousResourceCollection
      */
     public function index()
     {
-        //
+        // Load all messages, with author relation
+        $message = Message::with('author')->get();
+
+        return MessageResource::collection($message);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return void
      */
     public function store(Request $request)
     {
@@ -34,11 +39,13 @@ class MessageController extends Controller
      * Display the specified resource.
      *
      * @param Message $message
-     * @return void
+     * @return MessageResource
      */
     public function show(Message $message)
     {
-        //
+        $message->load('author');
+
+        return new MessageResource($message);
     }
 
     /**
