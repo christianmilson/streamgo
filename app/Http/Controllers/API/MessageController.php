@@ -7,6 +7,7 @@ use App\Http\Requests\API\Message\MessageStoreRequest;
 use App\Http\Requests\API\Message\MessageUpdateRequest;
 use App\Http\Resources\API\MessageResource;
 use App\Models\Message;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
@@ -81,10 +82,15 @@ class MessageController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Message $message
-     * @return void
+     * @return JsonResponse
      */
     public function destroy(Message $message)
     {
-        //
+        // Delete the message
+        $message->delete();
+
+        return response()->json([
+            'success'   => true,
+        ]);
     }
 }
