@@ -33,7 +33,7 @@ class MessageController extends Controller
      * Store a newly created resource in storage.
      *
      * @param MessageStoreRequest $request
-     * @return MessageResource
+     * @return JsonResponse
      */
     public function store(MessageStoreRequest $request)
     {
@@ -43,7 +43,10 @@ class MessageController extends Controller
         // Load author relation
         $message->load('author');
 
-        return new MessageResource($message);
+        return response()->json([
+            'success'   => true,
+            'data'      => new MessageResource($message),
+        ]);
     }
 
     /**
@@ -65,7 +68,7 @@ class MessageController extends Controller
      *
      * @param MessageUpdateRequest $request
      * @param Message $message
-     * @return MessageResource
+     * @return JsonResponse
      */
     public function update(MessageUpdateRequest $request, Message $message)
     {
@@ -78,7 +81,10 @@ class MessageController extends Controller
         // Load author relation
         $message->load('author');
 
-        return new MessageResource($message);
+        return response()->json([
+            'success'   => true,
+            'data'      => new MessageResource($message),
+        ]);
     }
 
     /**
